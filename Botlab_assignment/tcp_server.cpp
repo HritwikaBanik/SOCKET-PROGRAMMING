@@ -11,7 +11,7 @@ constexpr int DEFAULT_PORT = 8080;
 constexpr int BUFFER_SIZE = 1024;
 
 void handle_client(int client_sock) {
-    // Use unique_ptr for buffer
+    
     std::unique_ptr<char[]> buffer(new char[BUFFER_SIZE]);
 
     ssize_t read_bytes = read(client_sock, buffer.get(), BUFFER_SIZE - 1);
@@ -70,9 +70,9 @@ int main(int argc, char* argv[]) {
             continue;
         }
 
-        // Handle client in a new thread
+        // Handling client in a new thread
         threads.emplace_back(std::thread(handle_client, client_sock));
-        // Detach thread so it runs independently
+        // Detaching thread so it runs independently
         threads.back().detach();
     }
 

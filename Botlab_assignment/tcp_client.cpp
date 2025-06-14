@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // Use unique_ptr for send buffer (copy message)
+    // unique_ptr for send buffer
     auto send_buf = std::make_unique<char[]>(message.size() + 1);
     std::strcpy(send_buf.get(), message.c_str());
 
