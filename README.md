@@ -1,6 +1,4 @@
 
----
-```markdown
 # 🧩 Socket Programming
 
 This project implements a basic **TCP client-server** communication system in C++ using POSIX sockets. It demonstrates how a server can accept multiple client connections, receive messages, and respond with an acknowledgment. It also emphasizes **good memory management practices** including the use of smart pointers and validation with tools like Valgrind.
@@ -39,11 +37,13 @@ This project implements a basic **TCP client-server** communication system in C+
 
 ```
 
+```text
 socket-programming/
 ├── client.cpp        # TCP client implementation
 ├── server.cpp        # TCP server implementation
 ├── Makefile          # (Optional) to build both programs
 └── README.md         # Project documentation
+
 
 ````
 
