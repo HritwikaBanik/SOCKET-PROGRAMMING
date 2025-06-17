@@ -1,0 +1,57 @@
+  1. Initialise winsock library for windows application
+
+  2. Create a socket 
+
+  3. Get the IP(localhost) and port(12345):other clients will connect here
+
+  4. Bind the IP & port with the socket(created in step 2)
+
+  5. Listen on the socket 
+
+  6. Accept (this is a blocking call) : Here the code will wait untill there is any client connection request incoming
+
+  7. recv and send
+
+  8. close the socket
+
+  9. Clean up the winsock
+
+
+  FAQS:
+
+1.#pragma comment(lib, "ws2_32.lib")
+--->
+It's a compiler directive that tells the linker:
+“Link this program with ws2_32.lib.”
+So you don’t have to manually specify it in your compiler command.
+Used in Windows C++ programs to automatically link the Winsock library (ws2_32.lib) at compile time.
+Your program likely uses Windows Sockets API (Winsock) functions like:
+socket()
+bind()
+connect()
+listen()
+recv(), send(), etc.
+All of these are defined in the ws2_32.lib static library.
+
+2.✅ InetPton
+InetPton stands for "Internet address presentation to numeric".
+It converts an IP address in string format (e.g., "127.0.0.1") into binary format for use in socket structures like sockaddr_in.
+int InetPton(int af, PCTSTR pszAddrString, PVOID pAddrBuf);
+af: Address family — use AF_INET for IPv4.
+pszAddrString: The IP address in string form.
+
+It tries to convert "0.0.0.0" into a binary IP and store it in serveraddr.sin_addr.
+If that fails, it prints:
+
+pAddrBuf: A pointer to a buffer where the binary address will be stored (&serveraddr.sin_addr).
+| Part                   | Meaning                                                                                   |
+| ---------------------- | ----------------------------------------------------------------------------------------- |
+| `AF_INET`              | IPv4 address family                                                                       |
+| `_T("0.0.0.0")`        | IP address string — `"0.0.0.0"` means "any address" (used when binding to all interfaces) |
+| `&serveraddr.sin_addr` | Where the binary IP gets stored                                                           |
+| `!= 1`                 | `InetPton` returns `1` on success, so if it doesn’t, an error occurred                    |
+
+_T("0.0.0.0") is a macro that ensures compatibility with Unicode and ANSI (TCHAR strings). If you're not using TCHAR, just use "0.0.0.0" (plain string).
+
+
+3.
